@@ -160,8 +160,32 @@ def test_isPalindrome():
 # Run the test cases
 test_isPalindrome()
 
+#My new Solution
+class NewSolution:
+    def isPalindrome(self, s: str) -> bool:
+        s = self.cleanString(s)
+        # create two pointers one at the end of a string and one at begin of astring 
+        # compare the .lower() of each char if the values are the same move to the next char
+        # if the are diffrent return False 
+        # return true if the loop complete 
+        start = 0
+        end = len(s) -1
+        while start < end:
+          
+            if s[start].lower() != s[end].lower():
+                return False 
+            start+=1
+            end -=1 
+        return True
     
 
+
+    def cleanString(self,s:str)-> str:
+        result = ""
+        for char in s:
+            if char.isalpha() or char.isnumeric():
+                result+= char 
+        return result 
             
             
         
