@@ -47,3 +47,49 @@ def quick_sort(sequence):
                 items_lower.append(item)
                 
         return quick_sort(items_lower) + [pivot] + quick_sort(items_greater)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+import math     
+def new_quick(seq):
+    min = math.inf
+    if len(seq)>=1:
+        return seq
+    else:
+        pivot = seq.pop()
+        left = []
+        right = []
+        
+        for number in range(0,len(seq)):
+            if pivot >=left:
+                left.append(seq[number])
+            else: 
+                right.append(seq[number])
+    return new_quick(left) + pivot + new_quick(right)
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

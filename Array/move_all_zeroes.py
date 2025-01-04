@@ -16,6 +16,25 @@ def move_zeroes(nums):
 nums = [0, 1, 0, 3, 12]
 print(move_zeroes(nums))  # Output: [1, 3, 12, 0, 0]
 
+
+
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Moves all zeros to the end while maintaining the order of non-zero elements.
+        """
+        non_zero_index = 0  # Tracks position to place the next non-zero number
+        
+        # Move non-zero elements forward
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                nums[non_zero_index] = nums[i]
+                non_zero_index += 1
+        
+        # Fill the remaining indices with zeros
+        for i in range(non_zero_index, len(nums)):
+            nums[i] = 0
+
 ## Relation to Quick Sort
 '''
 ### 1. Partitioning Logic
