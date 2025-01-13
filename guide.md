@@ -3,6 +3,7 @@
 ## Month 1: Mastering Core Concepts and Easy Problems
 
 ### Week 1: Arrays and Strings
+
 - **Goals:** Learn basic patterns like two-pointer and sliding window.
 - **Topics:**
   - Two-pointer technique.
@@ -10,6 +11,7 @@
   - Common operations on arrays and strings.
 
 #### Daily Plan
+
 1. **Day 1:**
    - Read: Basics of arrays and strings.
    - Problems: Two easy problems on two-pointer technique.
@@ -27,6 +29,7 @@
 ---
 
 ### Week 2: Hash Maps and Hash Sets
+
 - **Goals:** Solve problems requiring frequency counts, lookups, and deduplication.
 - **Topics:**
   - Hashing for lookups.
@@ -34,6 +37,7 @@
   - Collision handling basics.
 
 #### Daily Plan
+
 1. **Day 1:**
    - Study: Hash maps and hash sets basics.
    - Problems: Easy problems like "two-sum" and "longest palindrome."
@@ -46,12 +50,14 @@
 ---
 
 ### Week 3: Trees
+
 - **Goals:** Understand tree traversal and recursive problem-solving.
 - **Topics:**
   - Binary trees and Binary Search Trees (BST).
   - Tree traversals (DFS, BFS, Inorder, Preorder, Postorder).
 
 #### Daily Plan
+
 1. **Day 1:**
    - Study: Basics of trees and traversals.
    - Problems: 2 easy problems on traversal.
@@ -65,6 +71,7 @@
 ---
 
 ### Week 4: Recap and Mock Interview 1
+
 1. **Day 1–5:**
    - Review all previous weeks’ topics.
    - Solve 2–3 problems daily (mixed topics).
@@ -79,12 +86,14 @@
 ## Month 2: Intermediate Concepts and Speed Optimization
 
 ### Week 5: Graphs
+
 - **Goals:** Learn graph traversal and applications.
 - **Topics:**
   - BFS, DFS (iterative and recursive).
   - Graph representations (adjacency matrix, list).
 
 #### Daily Plan
+
 1. **Day 1–2:**
    - Study BFS and DFS with visual tools like VisuAlgo.
    - Problems: Simple traversal problems like "Number of Islands."
@@ -97,6 +106,7 @@
 ---
 
 ### Week 6: Dynamic Programming (DP)
+
 - **Goals:** Master key DP patterns and memoization/tabulation.
 - **Topics:**
   - Fibonacci sequence (intro).
@@ -104,6 +114,7 @@
   - Subsequence patterns.
 
 #### Daily Plan
+
 1. **Day 1–2:**
    - Study: DP basics and memoization.
    - Problems: Fibonacci, climbing stairs, coin change (easy).
@@ -116,11 +127,13 @@
 ---
 
 ### Week 7: Combination of Topics
+
 - Solve mixed problems to simulate real interviews.
 
 ---
 
 ### Week 8: Mock Interview 2 and System Design Basics
+
 1. **Day 1–5:**
    - Practice system design concepts (e.g., scaling, caching, load balancing).
    - Watch system design YouTube channels (Gaurav Sen, Tech Dummies).
@@ -134,6 +147,7 @@
 ## Month 3: Advanced Topics and Intensive Practice
 
 ### Week 9: Backtracking and Greedy Algorithms
+
 - **Goals:** Solve backtracking problems efficiently.
 - **Topics:**
   - Subsets, permutations, combinations.
@@ -142,11 +156,13 @@
 ---
 
 ### Week 10: Advanced Graphs and DP
+
 - Tackle advanced graph algorithms like Union-Find and dynamic programming with 2D grids.
 
 ---
 
 ### Week 11–12: Final Prep
+
 1. **Daily Practice:**
    - 2 timed problems (1 medium, 1 hard).
    - Behavioral question prep (STAR method).
