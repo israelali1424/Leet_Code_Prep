@@ -24,3 +24,31 @@ class Solution:
                 curr = curr.left
             else:
                 return curr
+class Solution:
+    def __init__(self):
+        self.lca = [None]  # Use a list to store the LCA reference
+
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        def search(node):
+            if not node:
+                return
+
+            # Store the current node as a candidate for LCA
+            self.lca[0] = node
+
+            # Check if the current node matches either p or q
+            if node is p or node is q:
+                return
+
+            # Traverse the tree based on the values of p and q
+            if node.val < p.val and node.val < q.val:
+                search(node.right)
+            elif node.val > p.val and node.val > q.val:
+                search(node.left)
+            else:
+                # If neither condition matches, the current node is the LCA
+                return
+
+        search(root)
+        return self.lca[0]
+
