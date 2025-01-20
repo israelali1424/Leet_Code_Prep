@@ -5,6 +5,20 @@ Recursion is a programming concept where a function solves a problem by calling 
 ## Core Components of Recursion
 
 1. **Base Case**: The condition where recursion stops.
+
+# Understanding Base Cases in Recursion
+
+## 1. Understand the Purpose of a Base Case
+The base case is the termination condition of your recursive function. It tells the function when to stop making recursive calls and start returning values.
+
+The base case typically involves checking if the problem is small enough to be solved directly (e.g., an empty list, a single element, or a specific condition that doesn’t require further recursion).
+
+## 2. Common Patterns for Base Cases
+
+### For list-based problems:
+Often, the base case is when the list is empty or contains just one element.
+
+
 2. **Recursive Case**: The condition where the function calls itself.
 3. **State**: The changing input values in each recursive call.
 
