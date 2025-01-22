@@ -45,6 +45,35 @@ class Solution2:
     
         return [start+1,end+1]
     
+class SolutionThree:
+    # 1/20/2025 20 minutes I got logic right but kept test cases wrong because I was not considering the list being sorted I did not fully read the question
+    # and was forget to add one to the index
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        '''
+        leavge the list being sorted
+        left = 0
+        right = len  nums -1
+        while left < right:
+        sum = numsleft + numsright]
+        if   sum == target:
+        return [ left, right]
+        if sum > target:
+        right -1
+        else:
+        left +1
+        '''
+        left = 0 
+        right = len(numbers) -1 
+        while left < right:
+            sum_val = numbers[left]+ numbers[right]
+            if sum_val == target:
+                return [left+1,right+1]
+            elif sum_val > target:
+                right -=1
+            else: 
+                left +=1 
+
+    
 # Test case
 def main():
     solution = Solution()
