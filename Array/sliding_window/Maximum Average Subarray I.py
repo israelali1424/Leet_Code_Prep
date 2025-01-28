@@ -59,6 +59,20 @@ class Solution:
 
         # Return the maximum average
         return max_window_sum / k
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 def test_findMaxAverage(nums, k, expected):
     result = Solution().findMaxAverage(nums, k)
     if abs(result - expected) < 1e-5:  # Allowing a small margin for floating point comparison

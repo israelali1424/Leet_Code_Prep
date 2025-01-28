@@ -17,6 +17,7 @@ Input: nums = [5], k = 1
 Output: 5.00000
 Easy Question
 '''
+from typing import List
 
 class Solution:
     def findMaxAverage(self, nums: List[int], k: int) -> float:
