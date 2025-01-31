@@ -105,3 +105,41 @@ print("Test Case 7:", solution.lengthOfLongestSubstring("123abc123"))
 # Test Case 8: Long string with mixed characters
 print("Test Case 8:", solution.lengthOfLongestSubstring("pwwkew"))
 # Expected Output: 3
+
+1/30/2025
+# Works for only 409 of 700 test cases 
+class Solution_Two:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        max_len = 0
+        left = 0
+        right = 0
+        seen = set()
+        
+        while right < len(s):  # Corrected loop condition
+            if s[right] not in seen:
+                seen.add(s[right])
+            else:
+                max_len = max(max_len, len(seen))  
+                left = right  # Reset left to right
+                seen = set()  # Reset seen set
+                seen.add(s[right])  # Add current character
+
+            right += 1  
+        
+        max_len = max(max_len, len(seen))  # Final check for the max length
+        return max_len
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        max_len = 0
+        left = 0
+        right = 0
+        seen = {}
+        
+        while right < len(s):
+            if s[right] in seen and seen[s[right]] >= left:
+                left = seen[s[right]] + 1
+            
+            seen[s[right]] = right
+            max_len = max(max_len, right - left + 1)
+            right += 1
+        
+        return max_len

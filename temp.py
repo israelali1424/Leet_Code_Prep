@@ -1,176 +1,71 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
+from datetime import datetime, timedelta
+import calendar
 
-# Configuration to enable wider layout and right sidebar
-st.set_page_config(
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
-# Create two containers for our sidebars
-left_sidebar_placeholder = st.sidebar.empty()
-right_sidebar_placeholder = st.empty()
-
-# Custom CSS for dual sidebars
-st.markdown("""
-<style>
-    /* Main table styles */
-    .stDataFrame {
-        height: 400px;
-        overflow-y: scroll !important;
-        border: 2px solid #e5e7eb;
-        border-radius: 8px;
-        padding: 10px;
-        background-color: white;
-    }
-    .stDataFrame table {
-        text-align: left !important;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    .stDataFrame thead tr th {
-        position: sticky !important;
-        top: 0;
-        background: linear-gradient(180deg, #2c5282 0%, #2b6cb0 100%) !important;
-        color: white !important;
-        font-weight: bold !important;
-        padding: 12px 15px !important;
-        z-index: 999;
-        text-align: left !important;
-        border-bottom: 2px solid #e5e7eb !important;
-    }
-    .stDataFrame tbody tr:nth-child(even) {
-        background-color: #f7fafc;
-    }
-    .stDataFrame tbody tr:nth-child(odd) {
-        background-color: #ffffff;
-    }
-    .stDataFrame tbody tr:hover {
-        background-color: #ebf4ff !important;
-    }
-
-    /* Right sidebar styling */
-    [data-testid="stSidebarContent"] {
-        background-color: #f8fafc;
-    }
-    
-    /* Term card styling */
-    .term-card {
-        background-color: white;
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        border-left: 4px solid #2b6cb0;
-    }
-</style>
-""", unsafe_allow_html=True)
-
-# Create sample data
+# Sample Data (Replace with your actual data)
 data = {
-    'Name': [f'Person {i}' for i in range(1, 101)],
-    'Age': np.random.randint(20, 80, 100),
-    'Salary': np.random.randint(30000, 120000, 100),
-    'Department': np.random.choice(['HR', 'IT', 'Sales', 'Marketing'], 100),
-    'Years of Experience': np.random.randint(1, 20, 100),
-    'Performance Score': np.random.uniform(3.0, 5.0, 100).round(2)
+    'Date': pd.to_datetime(['2024-07-15', '2024-07-16', '2024-07-17', '2024-07-18', '2024-07-19', '2024-07-20', '2024-07-21', '2024-07-22', '2024-07-23', '2024-07-24', '2024-07-25']),
+    'Value': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110]
 }
 df = pd.DataFrame(data)
 
-# Left sidebar content
-with st.sidebar:
-    st.header('Table Filters')
-    search_term = st.text_input('Search by Name')
-    dept_filter = st.multiselect('Filter by Department', 
-                                options=sorted(df['Department'].unique()),
-                                default=[])
-    
-    st.markdown('---')
-    st.subheader('Age Percentile Filter')
-    percentile = st.text_input('Show Top Percentage of Ages', 
-                              value='100',
-                              help='Enter a number between 1-100 to show top N% of ages')
-    
-    try:
-        percentile = float(percentile)
-        if percentile < 1 or percentile > 100:
-            st.error('Please enter a number between 1 and 100')
-            percentile = 100
-    except ValueError:
-        st.error('Please enter a valid number')
-        percentile = 100
+# Sidebar for Date Range Filter
+st.sidebar.header("Date Range Filter")
 
-    st.markdown('---')
-    st.subheader('Summary Statistics')
+# Date Picker for Start Date
+start_date = st.sidebar.date_input("Start Date", min_value=df['Date'].min(), max_value=df['Date'].max(), value=df['Date'].min())
 
-# Main content
-col1, col2 = st.columns([4, 1])
+# Date Picker for End Date
+end_date = st.sidebar.date_input("End Date", min_value=df['Date'].min(), max_value=df['Date'].max(), value=df['Date'].max())
 
-with col1:
-    # Apply filters
-    filtered_df = df.copy()
-    if search_term:
-        filtered_df = filtered_df[filtered_df['Name'].str.contains(search_term, case=False)]
-    if dept_filter:
-        filtered_df = filtered_df[filtered_df['Department'].isin(dept_filter)]
+# Convert to datetime objects and adjust end_date
+start_date = pd.to_datetime(start_date)
+end_date = pd.to_datetime(end_date) + timedelta(days=1) - timedelta(seconds=1)
 
-    # Apply age percentile filter
-    age_threshold = np.percentile(df['Age'], 100 - percentile)
-    filtered_df = filtered_df[filtered_df['Age'] >= age_threshold]
-    filtered_df = filtered_df.sort_values('Age', ascending=False)
+# Filter the DataFrame
+filtered_df = df[(df['Date'] >= start_date) & (df['Date'] <= end_date)]
 
-    st.header("Employee Database")
-    if percentile < 100:
-        st.info(f"Showing employees in the top {percentile:.1f}% by age (Age ≥ {age_threshold:.0f})")
-    
-    st.dataframe(
-        filtered_df,
-        height=400,
-        column_config={
-            'Name': st.column_config.TextColumn('Name', width='medium'),
-            'Age': st.column_config.NumberColumn('Age', width='small'),
-            'Salary': st.column_config.NumberColumn('Salary', format='$%d', width='medium'),
-            'Department': st.column_config.TextColumn('Department', width='medium'),
-            'Years of Experience': st.column_config.NumberColumn('Years of Experience', width='small'),
-            'Performance Score': st.column_config.NumberColumn('Performance Score', format='%.2f', width='medium')
-        },
-        hide_index=True
-    )
+# Display the Filtered Data
+st.header("Filtered Data")
+st.dataframe(filtered_df)
 
-# Update summary statistics in left sidebar
-with st.sidebar:
-    st.write(f"Total Employees: {len(filtered_df)}")
-    st.write(f"Average Salary: ${filtered_df['Salary'].mean():,.2f}")
-    st.write(f"Average Age: {filtered_df['Age'].mean():.1f}")
-    st.write(f"Age Range: {filtered_df['Age'].min():.0f} - {filtered_df['Age'].max():.0f}")
+# Calendar View (Improved)
+st.subheader("Calendar View")
 
-# Right sidebar content using a second sidebar container
-with col2:
-    # Add expander to make it collapsible
-    with st.expander("📚 Key Terms", expanded=True):
-        st.markdown("""
-        <div class="term-card">
-            <strong>Performance Score</strong><br>
-            • 4.5 - 5.0: Outstanding<br>
-            • 4.0 - 4.4: Exceeds Expectations<br>
-            • 3.5 - 3.9: Meets Expectations<br>
-            • 3.0 - 3.4: Needs Improvement
-        </div>
-        
-        <div class="term-card">
-            <strong>Department</strong><br>
-            • HR: Human Resources<br>
-            • IT: Information Technology<br>
-            • Sales: Sales and Business Development<br>
-            • Marketing: Marketing and Communications
-        </div>
-        
-        <div class="term-card">
-            <strong>Years of Experience</strong><br>
-            Total years of relevant work experience, including both internal and external positions.
-        </div>
-        
-        <div class="term-card">
-            <strong>Salary</strong><br>
-            Annual compensation in USD, excluding bonuses and benefits.
-        </div>
-        """, unsafe_allow_html=True)
+def display_calendar(year, month, data):
+    cal = calendar.monthcalendar(year, month)
+    st.write(f"### {calendar.month_name[month]} {year}")  # Month and Year header
+    cols = st.columns(7)  # Create columns for the days of the week
+    for day in ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]:
+        cols[0].write(day) #Write the day name only once
+        cols = cols[1:] #Shift columns to the next one
+
+    for week in cal:
+        cols = st.columns(7)
+        for day in week:
+            if day == 0:  # Empty cell for days outside the month
+                cols[0].write("")
+            else:
+                date_str = f"{year}-{month:02}-{day:02}"  # Create date string
+                date_obj = pd.to_datetime(date_str)
+                value = data.loc[data['Date'] == date_obj, 'Value'].iloc[0] if date_obj in data['Date'].values else None
+                display_text = str(day)
+                if value is not None:
+                  display_text += f" ({value})"
+                cols[0].write(display_text)
+
+            cols = cols[1:]
+
+
+# Display calendar for each month in the selected range
+for dt in pd.date_range(start=start_date, end=end_date, freq='MS'):  # 'MS' for month start frequency
+    year = dt.year
+    month = dt.month
+    month_data = filtered_df[(filtered_df['Date'].dt.year == year) & (filtered_df['Date'].dt.month == month)]
+    display_calendar(year, month, month_data)
+
+
+# Chart of Filtered Data
+st.subheader("Chart of Filtered Data")
+st.line_chart(filtered_df.set_index('Date')['Value'])
