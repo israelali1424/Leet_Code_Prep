@@ -23,3 +23,31 @@ class Solution:
         right = self.isSameTree(p.right, q.right)
         # Both left and right subtrees must be identical
         return left and right
+    
+2/1/2025
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# my Solution
+class Solution_Feb:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        def dfs(p: Optional[TreeNode], q: Optional[TreeNode]):
+            if not p and not q:
+                return True 
+            if not p and q:
+                return False 
+            if not q and  p:
+                return False 
+            left = dfs(p.left,q.left) 
+            if p.val != q.val:
+                return False 
+            right = dfs(p.right,q.right)
+            return  left and right 
+        return dfs(p,q) 
+        
+
+
+        
