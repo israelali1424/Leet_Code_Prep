@@ -149,7 +149,23 @@ class Solution_Two: # very slow runtine 223ms and beats 5.04
                 max_profit = max(max_profit, profit)
 
         return max_profit 
-
+'''
+2/24/2025
+'''
+# I sloved this one all on my own used a white board to pseudo code
+class Solution_1:
+    def maxProfit(self, prices: List[int]) -> int:
+        max_profit = 0
+        pointer_1 = 0
+        pointer_2 = 0
+        for i in range(0,len(prices)):
+            if prices[i]< prices[pointer_1]:
+                #print(prices[i])
+                pointer_1 =i
+            max_profit = max(max_profit,(prices[pointer_2]- prices[pointer_1]))
+            print(f'({prices[pointer_2]} - {prices[pointer_1]})')
+            pointer_2 +=1
+        return max_profit 
 # Test Cases
 if __name__ == "__main__":
     solution = Solution_Two()
