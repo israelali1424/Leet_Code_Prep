@@ -22,6 +22,8 @@ edges = [
   ['o', 'n']
 ]
 
+
+
 def create_undirected_graph(edges):
     graph = {}
     for a,b, in edges:
@@ -106,7 +108,27 @@ def undirected_path(edges, node_A, node_B):
 
 
 print(undirected_path(edges,'j','m'))
-
+# Visual representation of an example graph:
+#
+#    a --- c
+#    |     |
+#    |     |
+#    b     e
+#    |
+#    |
+#    d --- f
+#
+# Edges: [('a','b'), ('b','d'), ('d','f'), ('a','c'), ('c','e')]
+#
+# Adjacency list representation:
+# {
+#   'a': ['b', 'c'],
+#   'b': ['a', 'd'],
+#   'c': ['a', 'e'],
+#   'd': ['b', 'f'],
+#   'e': ['c'],
+#   'f': ['d']
+# }
 # Test Cases
 if __name__ == "__main__":
     edges1 = [('i', 'j'), ('k', 'i'), ('m', 'k'), ('k', 'l'), ('o', 'n')]
@@ -129,6 +151,12 @@ if __name__ == "__main__":
 
     edges4 = [('a', 'b'), ('b', 'c'), ('c', 'd'), ('d', 'e')]
     result4 = undirected_path(edges4, 'a', 'f')
+    print("Test Case 4:", result4, "Passed" if result4 == False else "Failed")
+    assert result4 == False
+    # Expected Output: False
+    
+    edges4 = [('a', 'b'), ('b', 'c'), ('c', 'd'), ('d', 'e')]
+    result4 = undirected_path(edges4, 'e', 'f')
     print("Test Case 4:", result4, "Passed" if result4 == False else "Failed")
     assert result4 == False
     # Expected Output: False
