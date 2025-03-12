@@ -43,7 +43,7 @@ def connected_components_count(graph):
   return count              
           
 '''
-3/11/25
+3/112/25
 The main issues with your original code were: From cLaude
 
 You weren't starting a new BFS for each unvisited component, which is necessary to count all components
