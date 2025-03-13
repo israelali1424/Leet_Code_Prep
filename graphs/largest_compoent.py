@@ -193,3 +193,19 @@ def largest_component_broke(graph):
       
         
   pass # todo
+
+
+
+
+
+# Test with the example
+test_graph = {
+  0: [8, 1, 5],
+  1: [0],
+  5: [0, 8],
+  8: [0, 5],
+  2: [3, 4],
+  3: [2, 4],
+  4: [3, 2]
+}
+print(largest_component(test_graph))  # Should output 4

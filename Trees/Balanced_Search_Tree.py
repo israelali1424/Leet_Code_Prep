@@ -12,27 +12,34 @@ class TreeNode:
         self.left = left
         self.right = right
 
+\
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        # Helper function to perform depth-first search
-        def dfs(root):
-            # If the node is None, it's balanced with height 0
-            if not root:
-                return [True, 0]
-            
-            # Recursively check the left and right subtrees
-            left, right = dfs(root.left), dfs(root.right)
-            
-            # Check if the current node is balanced
-            balanced = (left[0] and right[0] and abs(left[1] - right[1]) <= 1)
-            
-            # Return whether the subtree is balanced and its height
-            return [balanced, 1 + max(left[1], right[1])]
+        balanced = [True]
         
-        # Start the DFS from the root and return whether the tree is balanced
-        return dfs(root)[0]
-    
-    
+        def height(node):
+            if not node:
+                return 0
+                
+            left = height(node.left)
+            if  balanced [0]== False:
+                return 0
+            right = height(node.right)
+            
+            # Check if this node is unbalanced
+            if abs(left - right) > 1:
+                balanced[0]= False
+                
+            return max(left, right) + 1 
+        
+        height(root)
+        return balanced[0]
 # Test cases for Balanced Binary Tree
 def test_isBalanced():
     solution = Solution()
