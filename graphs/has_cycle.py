@@ -29,7 +29,7 @@ Constraints:
 
 Follow-up: Can you implement both DFS and BFS approaches for this problem?
 """
-
+# my not fully working version
 def detect_cycle(graph):
     seen = set()
     def dfs(graph,node,seen):
@@ -87,7 +87,7 @@ def test_detect_cycle():
     # Test case 4 - Disconnected graph with a cycle
     graph4 = {0: [1], 1: [2], 2: [], 3: [4], 4: [5], 5: [3]}
     assert detect_cycle(graph4) == True
-    
+# calude fixed version
 def detect_cycle(graph):
     # Track nodes that have been visited in any path
     visited = set()
